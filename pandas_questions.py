@@ -28,7 +28,9 @@ def merge_regions_and_departments(regions, departments):
     The columns in the final DataFrame should be:
     ['code_reg', 'name_reg', 'code_dep', 'name_dep']
     """
-    dict_rename = {'region_code': 'code_reg', 'code': 'code_dep', 'name': 'name_dep'}
+    dict_rename = {'region_code': 'code_reg',
+                   'code': 'code_dep',
+                   'name': 'name_dep'}
 
     regions = regions[['code', 'name']]
     regions = regions.rename(columns={'code': 'code_reg', 'name': 'name_reg'})
@@ -53,7 +55,9 @@ def merge_referendum_and_areas(referendum, regions_and_departments):
     France, like Guadaloupe, Reunion, or Tahiti.
     """
 
-    DOMTOM_index = referendum[referendum['Department code'].str.contains('Z')].index
+    DOMTOM_index = referendum[
+        referendum['Department code'].str.contains('Z')
+        ].index
     referendum = referendum.drop(DOMTOM_index)
 
     referendum['Department code'] = referendum['Department code'].str.zfill(2)
